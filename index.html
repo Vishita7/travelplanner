@@ -25,14 +25,13 @@
   --glass3: rgba(255,255,255,0.18);
   --rim: rgba(255,255,255,0.14);
   --rim2: rgba(255,255,255,0.22);
-  --dark-glass: rgba(0,0,0,0.32);
-  --dark-glass2: rgba(0,0,0,0.22);
+  --dark-glass: rgba(4,16,34,0.72);
+  --dark-glass2: rgba(4,16,34,0.62);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 
-/* ── FIXED BACKGROUND ── */
 body {
   font-family:'Outfit',sans-serif;
   color:var(--snow);
@@ -42,30 +41,17 @@ body {
   background:#071520;
 }
 
-/* The blurred Michigan background — fixed behind everything */
-body::before {
-  content:'';
-  position:fixed;
-  inset:0;
-  z-index:0;
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sleeping_Bear_Dunes.jpg/1280px-Sleeping_Bear_Dunes.jpg');
-  background-size:cover;
-  background-position:center 40%;
-  filter:blur(18px) brightness(0.38) saturate(1.4);
-  transform:scale(1.08); /* prevents blur edge bleed */
+/* Fixed background — real div, not pseudo-element (iOS Safari compatible) */
+#bg { position:fixed; inset:0; z-index:0; overflow:hidden; }
+#bg-img {
+  position:absolute; inset:-40px;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Pictured_Rocks_National_Lakeshore.jpg/1280px-Pictured_Rocks_National_Lakeshore.jpg');
+  background-size:cover; background-position:center 45%;
+  filter:blur(14px) brightness(0.30) saturate(1.6);
 }
-
-/* Subtle color wash over the bg */
-body::after {
-  content:'';
-  position:fixed;
-  inset:0;
-  z-index:1;
-  background: linear-gradient(160deg,
-    rgba(5,30,55,0.55) 0%,
-    rgba(3,18,35,0.45) 40%,
-    rgba(10,40,30,0.35) 100%);
-  pointer-events:none;
+#bg-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(160deg, rgba(4,22,48,0.70) 0%, rgba(2,14,30,0.58) 50%, rgba(6,30,22,0.52) 100%);
 }
 
 /* All content sits above the fixed bg */
@@ -87,12 +73,12 @@ body::after {
 
 /* STATS */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rim);border-bottom:1px solid var(--rim)}
-.stat{background:var(--dark-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:.95rem .4rem;text-align:center}
+.stat{background:rgba(4,16,34,0.68);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:.95rem .4rem;text-align:center}
 .stat-n{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--water);line-height:1;text-shadow:0 0 20px rgba(77,217,217,.4)}
 .stat-l{font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--fog2);margin-top:3px}
 
 /* NAV */
-.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(4,15,30,.75);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:.5px solid var(--rim)}
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(4,15,30,.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:.5px solid var(--rim)}
 .nav{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 1rem;-webkit-overflow-scrolling:touch}
 .nav::-webkit-scrollbar{display:none}
 .nav-tab{flex-shrink:0;font-family:'Outfit',sans-serif;font-size:12px;font-weight:400;padding:.85rem 1rem;background:none;border:none;border-bottom:2px solid transparent;color:var(--fog);cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.04em}
@@ -211,7 +197,7 @@ body::after {
 .ld{width:8px;height:8px;border-radius:2px;flex-shrink:0}
 
 /* BOTTOM BAR */
-.btm{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(3,12,24,.82);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-top:.5px solid var(--rim2);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+.btm{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(3,12,24,.90);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-top:.5px solid var(--rim2);display:flex;padding-bottom:env(safe-area-inset-bottom)}
 .btm-t{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:.55rem 0 .45rem;background:none;border:none;color:var(--fog2);cursor:pointer;font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;letter-spacing:.06em;transition:color .15s}
 .btm-t.on{color:var(--water)}
 .bic{font-size:19px;line-height:1}
@@ -224,6 +210,12 @@ body::after {
 </style>
 </head>
 <body>
+
+<!-- Fixed blurred Michigan background — works on iOS Safari -->
+<div id="bg">
+  <div id="bg-img"></div>
+  <div id="bg-overlay"></div>
+</div>
 
 <div class="hero" style="position:relative">
   <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Pictured_Rocks_National_Lakeshore.jpg/1280px-Pictured_Rocks_National_Lakeshore.jpg" onerror="this.style.background='linear-gradient(135deg,#071520,#0d2a40)';this.style.display='block'" alt="Pictured Rocks">
