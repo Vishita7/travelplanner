@@ -41,17 +41,16 @@ body {
   background:#071520;
 }
 
-/* Fixed background — real div, not pseudo-element (iOS Safari compatible) */
-#bg { position:fixed; inset:0; z-index:0; overflow:hidden; }
-#bg-img {
-  position:absolute; inset:-40px;
-  background-image:url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Pictured_Rocks_National_Lakeshore.jpg/1280px-Pictured_Rocks_National_Lakeshore.jpg');
-  background-size:cover; background-position:center 45%;
-  filter:blur(14px) brightness(0.30) saturate(1.6);
+/* Fixed background — <img> tag approach, most reliable on all browsers + iOS */
+#bg { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; overflow:hidden; }
+#bg img {
+  position:absolute; top:-5%; left:-5%; width:110%; height:110%;
+  object-fit:cover; object-position:center 45%;
+  filter:blur(16px) brightness(0.28) saturate(1.7);
 }
 #bg-overlay {
-  position:absolute; inset:0;
-  background:linear-gradient(160deg, rgba(4,22,48,0.70) 0%, rgba(2,14,30,0.58) 50%, rgba(6,30,22,0.52) 100%);
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background:linear-gradient(160deg, rgba(4,22,48,0.65) 0%, rgba(2,14,30,0.55) 50%, rgba(6,30,22,0.50) 100%);
 }
 
 /* All content sits above the fixed bg */
@@ -211,9 +210,11 @@ body {
 </head>
 <body>
 
-<!-- Fixed blurred Michigan background — works on iOS Safari -->
+<!-- Fixed blurred Michigan background — <img> tag approach for max compatibility -->
 <div id="bg">
-  <div id="bg-img"></div>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Pictured_Rocks_National_Lakeshore.jpg/1280px-Pictured_Rocks_National_Lakeshore.jpg"
+       alt=""
+       onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sleeping_Bear_Dunes.jpg/1280px-Sleeping_Bear_Dunes.jpg'">
   <div id="bg-overlay"></div>
 </div>
 
