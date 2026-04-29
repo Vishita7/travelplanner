@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#07111f">
+<title>Michigan · May 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #07111f;
+  --ink2: #0e1f35;
+  --ink3: #172d47;
+  --glass: rgba(255,255,255,0.05);
+  --glass2: rgba(255,255,255,0.09);
+  --rim: rgba(255,255,255,0.1);
+  --rim2: rgba(255,255,255,0.18);
+  --water: #3ecfcf;
+  --water2: #26a8a8;
+  --gold: #f0c060;
+  --ember: #ff6b45;
+  --snow: #f2ede6;
+  --fog: rgba(242,237,230,0.5);
+  --fog2: rgba(242,237,230,0.3);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--snow);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.panel{display:none;animation:fu .3s ease}
+.panel.active{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* HERO */
+.hero{position:relative;height:52vw;min-height:220px;max-height:320px;overflow:hidden}
+.hero-img{width:100%;height:100%;object-fit:cover;object-position:center 60%;filter:brightness(.55) saturate(1.2)}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,var(--ink) 100%)}
+.hero-ct{position:absolute;bottom:0;left:0;right:0;padding:0 1.25rem 1.25rem}
+.hero-ey{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--water);margin-bottom:4px}
+.hero-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,9vw,3.2rem);font-weight:600;line-height:1;color:var(--snow)}
+.hero-h em{font-style:italic;color:var(--water)}
+.hero-d{font-size:11px;color:var(--fog);margin-top:4px;letter-spacing:.05em}
+
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rim);border-bottom:1px solid var(--rim)}
+.stat{background:var(--ink);padding:.9rem .4rem;text-align:center}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--water);line-height:1}
+.stat-l{font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--fog2);margin-top:3px}
+
+/* NAV */
+.nav-wrap{position:sticky;top:0;z-index:50;background:rgba(7,17,31,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:.5px solid var(--rim)}
+.nav{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 1rem;-webkit-overflow-scrolling:touch}
+.nav::-webkit-scrollbar{display:none}
+.nav-tab{flex-shrink:0;font-family:'Outfit',sans-serif;font-size:12px;font-weight:400;padding:.85rem 1rem;background:none;border:none;border-bottom:2px solid transparent;color:var(--fog);cursor:pointer;transition:all .2s;white-space:nowrap;letter-spacing:.03em}
+.nav-tab.on{color:var(--water);border-bottom-color:var(--water);font-weight:500}
+
+/* CONTENT */
+.content{padding:1.25rem 1.1rem 6rem}
+
+/* PLACE SCROLL */
+.pscroll{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;margin:0 -1.1rem;padding:0 1.1rem .5rem;-webkit-overflow-scrolling:touch}
+.pscroll::-webkit-scrollbar{display:none}
+.pc{flex-shrink:0;width:155px;border-radius:14px;overflow:hidden;background:var(--ink2);border:.5px solid var(--rim)}
+.pc-img{width:100%;height:105px;object-fit:cover;display:block;background:var(--ink3)}
+.pc-ph{width:100%;height:105px;display:flex;align-items:center;justify-content:center;font-size:2rem;background:linear-gradient(135deg,var(--ink2),var(--ink3))}
+.pc-body{padding:8px 10px 10px}
+.pc-day{font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--water);margin-bottom:3px}
+.pc-name{font-size:12px;font-weight:500;color:var(--snow);line-height:1.3}
+.pc-tag{font-size:10px;color:var(--fog2);margin-top:2px}
+
+/* TIMELINE */
+.tl{position:relative;padding-left:1.5rem;margin-top:.5rem}
+.tl::before{content:'';position:absolute;left:6px;top:10px;bottom:10px;width:1px;background:linear-gradient(to bottom,var(--water),var(--gold) 50%,var(--ember))}
+.tl-s{position:relative;padding:.6rem 0 .6rem 1rem}
+.tl-d{position:absolute;left:-1.5rem;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;border:2px solid var(--ink);flex-shrink:0}
+.tl-date{font-size:10px;color:var(--fog2);margin-bottom:1px}
+.tl-name{font-size:13px;font-weight:500;color:var(--snow)}
+.tl-note{font-size:11px;color:var(--fog);margin-top:1px}
+.tl-sleep{font-size:11px;color:var(--gold);margin-top:1px}
+
+/* SECTION HEADER */
+.sh{display:flex;align-items:baseline;gap:10px;margin:1.5rem 0 .75rem}
+.sh-l{font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--water)}
+.sh-line{flex:1;height:.5px;background:var(--rim)}
+
+/* DAY CARDS */
+.dc{background:var(--ink2);border:.5px solid var(--rim);border-radius:16px;margin-bottom:1rem;overflow:hidden}
+.dh{position:relative;height:130px;overflow:hidden;cursor:pointer}
+.dh-img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.6) saturate(1.1);transition:transform .4s ease}
+.dc:hover .dh-img{transform:scale(1.03)}
+.dh-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,17,31,.7) 0%,transparent 60%)}
+.dh-ct{position:absolute;bottom:0;left:0;right:0;padding:10px 14px;display:flex;align-items:flex-end;justify-content:space-between}
+.d-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:600;color:rgba(255,255,255,.15);position:absolute;top:6px;right:12px;line-height:1}
+.d-date{font-size:9px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--water);margin-bottom:2px}
+.d-title{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;color:var(--snow);line-height:1.1}
+.d-chev{font-size:12px;color:rgba(255,255,255,.5);transition:transform .3s;flex-shrink:0;margin-bottom:4px}
+.dc.open .d-chev{transform:rotate(180deg)}
+.chips{display:flex;flex-wrap:wrap;gap:5px;padding:.65rem .9rem;border-bottom:.5px solid var(--rim);background:rgba(255,255,255,.02)}
+.chip{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:400;border:.5px solid}
+.ch-d{background:rgba(62,207,207,.1);color:var(--water);border-color:rgba(62,207,207,.25)}
+.ch-s{background:rgba(240,192,96,.1);color:var(--gold);border-color:rgba(240,192,96,.25)}
+.ch-w{background:rgba(255,107,69,.1);color:var(--ember);border-color:rgba(255,107,69,.25)}
+.db{display:none}
+.dc.open .db{display:block}
+.sw{padding:.75rem .9rem;display:flex;flex-direction:column;gap:1.1rem}
+.stop-hd{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.stop-ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:var(--glass)}
+.stop-n{font-size:13px;font-weight:500;color:var(--snow)}
+.stop-t{font-size:10px;color:var(--fog2)}
+.stop-img{width:100%;height:115px;object-fit:cover;border-radius:10px;display:block;margin-bottom:8px;background:var(--ink3)}
+.spec{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}
+.opt{border-radius:8px;padding:7px 8px;border:.5px solid}
+.opt-l{font-size:9px;font-weight:600;letter-spacing:.06em;margin-bottom:4px}
+.opt-t{font-size:10px;line-height:1.45;color:var(--fog)}
+.mild{border-color:rgba(62,207,207,.3);background:rgba(62,207,207,.07)}
+.mild .opt-l{color:var(--water)}
+.mod{border-color:rgba(240,192,96,.3);background:rgba(240,192,96,.07)}
+.mod .opt-l{color:var(--gold)}
+.high{border-color:rgba(255,107,69,.3);background:rgba(255,107,69,.07)}
+.high .opt-l{color:var(--ember)}
+.tip{font-size:10px;font-style:italic;color:var(--fog2);margin-top:6px;line-height:1.5}
+.sdiv{height:.5px;background:var(--rim)}
+.slp{display:flex;align-items:center;gap:10px;padding:.75rem .9rem;border-top:.5px solid var(--rim);background:rgba(240,192,96,.04)}
+.slp-ic{width:32px;height:32px;border-radius:9px;background:rgba(240,192,96,.12);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.slp-n{font-size:13px;font-weight:500;color:var(--gold)}
+.slp-s{font-size:10px;color:var(--fog2);margin-top:1px}
+
+/* MAP BUTTON */
+.map-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:.95rem;border-radius:14px;background:var(--water);color:var(--ink);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;text-decoration:none;border:none;cursor:pointer;transition:background .15s,transform .1s;letter-spacing:.01em}
+.map-btn:active{transform:scale(.97);background:var(--water2)}
+
+/* BOOKINGS */
+.bi{display:flex;align-items:flex-start;gap:10px;padding:.9rem 1rem;background:var(--ink2);border:.5px solid var(--rim);border-radius:12px;margin-bottom:8px}
+.bi.urg{border-color:rgba(255,107,69,.35)}
+.bi.sn{border-color:rgba(240,192,96,.28)}
+.pri{font-size:9px;padding:3px 8px;border-radius:20px;font-weight:600;white-space:nowrap;margin-top:1px;flex-shrink:0;letter-spacing:.04em}
+.pri-now{background:rgba(255,107,69,.18);color:var(--ember)}
+.pri-soon{background:rgba(240,192,96,.18);color:var(--gold)}
+.pri-arr{background:rgba(62,207,207,.18);color:var(--water)}
+.bn{font-size:13px;font-weight:500;color:var(--snow);margin-bottom:3px}
+.bs{font-size:11px;color:var(--fog);line-height:1.5}
+.bl{color:var(--water);text-decoration:none;font-weight:500}
+
+/* ALERTS */
+.alert{border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.1rem}
+.a-ok{background:rgba(62,207,207,.08);border:.5px solid rgba(62,207,207,.25)}
+.a-w{background:rgba(255,107,69,.08);border:.5px solid rgba(255,107,69,.25)}
+.at{font-size:13px;font-weight:500;margin-bottom:5px}
+.a-ok .at{color:var(--water)}
+.a-w .at{color:var(--ember)}
+.ab{font-size:12px;color:var(--fog);line-height:1.65}
+
+/* TRAFFIC */
+.tc{background:var(--ink2);border:.5px solid var(--rim);border-radius:14px;padding:1rem;margin-bottom:.9rem}
+.th{display:flex;align-items:center;gap:10px;margin-bottom:.75rem}
+.tic{width:38px;height:38px;border-radius:10px;background:var(--glass2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.tt{font-size:13px;font-weight:500;color:var(--snow)}
+.tsub{font-size:11px;color:var(--fog2);margin-top:1px}
+.tb2{font-size:12px;color:var(--fog);line-height:1.65;margin-bottom:.8rem}
+.tb2 strong{color:var(--ember);font-weight:500}
+.tbar{display:flex;gap:2px;height:8px;border-radius:4px;overflow:hidden;margin-bottom:4px}
+.ts{flex:1}
+.tlbls{display:flex;margin-bottom:6px}
+.tlbl{flex:1;font-size:8px;color:var(--fog2);text-align:center}
+.leg{display:flex;gap:12px;flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--fog)}
+.ld{width:8px;height:8px;border-radius:2px;flex-shrink:0}
+
+/* BOTTOM BAR */
+.btm{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(7,17,31,.94);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:.5px solid var(--rim);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+.btm-t{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:.55rem 0 .45rem;background:none;border:none;color:var(--fog2);cursor:pointer;font-family:'Outfit',sans-serif;font-size:9px;font-weight:400;letter-spacing:.05em;transition:color .15s}
+.btm-t.on{color:var(--water)}
+.bic{font-size:19px;line-height:1}
+
+/* HOME */
+.hcta{background:linear-gradient(135deg,var(--ink2),var(--ink3));border:.5px solid var(--rim);border-radius:16px;padding:1.25rem;margin-bottom:1.25rem;text-align:center}
+.hcta h2{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:var(--snow);margin-bottom:.3rem}
+.hcta h2 em{font-style:italic;color:var(--water)}
+.hcta p{font-size:12px;color:var(--fog);margin-bottom:1rem}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Pictured_Rocks_National_Lakeshore.jpg/1280px-Pictured_Rocks_National_Lakeshore.jpg" onerror="this.style.background='linear-gradient(135deg,#07111f,#172d47)';this.style.display='block'" alt="Pictured Rocks">
+  <div class="hero-ov"></div>
+  <div class="hero-ct">
+    <div class="hero-ey">Memorial Day Weekend · 2026</div>
+    <h1 class="hero-h">Michigan<br><em>Road Trip</em></h1>
+    <div class="hero-d">May 22–26 &nbsp;·&nbsp; GRR → UP → Island → Dunes → GRR</div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-n">4.5</div><div class="stat-l">Days</div></div>
+  <div class="stat"><div class="stat-n">10</div><div class="stat-l">Stops</div></div>
+  <div class="stat"><div class="stat-n">4</div><div class="stat-l">Hotels</div></div>
+  <div class="stat"><div class="stat-n">~15h</div><div class="stat-l">Driving</div></div>
+</div>
+
+<div class="nav-wrap">
+  <nav class="nav">
+    <button class="nav-tab on" onclick="sw('home',this)">Overview</button>
+    <button class="nav-tab" onclick="sw('days',this)">Days</button>
+    <button class="nav-tab" onclick="sw('book',this)">Bookings</button>
+    <button class="nav-tab" onclick="sw('traffic',this)">Traffic</button>
+  </nav>
+</div>
+
+<!-- HOME -->
+<div id="home" class="panel active"><div class="content">
+  <div class="hcta">
+    <h2>GRR to the <em>UP</em> &amp; back</h2>
+    <p>Fri May 22 · 2:00 PM arrival &nbsp;—&nbsp; Tue May 26 · 5:34 PM departure</p>
+    <a class="map-btn" href="https://www.google.com/maps/dir/Gerald+R.+Ford+International+Airport,+Grand+Rapids,+MI/Mackinac+Bridge,+Mackinaw+City,+MI/Pictured+Rocks+National+Lakeshore,+Munising,+MI/Kitch-iti-kipi,+Manistique,+MI/Tahquamenon+Falls+State+Park,+Paradise,+MI/St+Ignace,+MI/Mackinac+Island,+MI/Traverse+City,+MI/Sleeping+Bear+Dunes+National+Lakeshore,+Empire,+MI/Saugatuck,+MI/Holland+State+Park,+Holland,+MI/Gerald+R.+Ford+International+Airport,+Grand+Rapids,+MI/" target="_blank">🗺&nbsp; Open Full Route in Maps</a>
+  </div>
+
+  <div class="sh"><div class="sh-l">Highlights</div><div class="sh-line"></div></div>
+  <div class="pscroll">
+    <div class="pc">
+      <img class="pc-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Pictured_Rocks_National_Lakeshore.jpg/640px-Pictured_Rocks_National_Lakeshore.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Pictured Rocks">
+      <div class="pc-ph" style="display:none">🌊</div>
+      <div class="pc-body"><div class="pc-day">Sat · Day 2</div><div class="pc-name">Pictured Rocks</div><div class="pc-tag">Start 7:30 AM</div></div>
+    </div>
+    <div class="pc">
+      <div class="pc-ph" style="background:linear-gradient(135deg,#0a2540,#0e3d5c)">💎</div>
+      <div class="pc-body"><div class="pc-day">Sat · Day 2</div><div class="pc-name">Kitch-iti-kipi</div><div class="pc-tag">The Big Spring</div></div>
+    </div>
+    <div class="pc">
+      <img class="pc-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Tahquamenon_Falls_MI.jpg/640px-Tahquamenon_Falls_MI.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Tahquamenon">
+      <div class="pc-ph" style="display:none">💦</div>
+      <div class="pc-body"><div class="pc-day">Sat · Day 2</div><div class="pc-name">Tahquamenon Falls</div><div class="pc-tag">2nd largest East</div></div>
+    </div>
+    <div class="pc">
+      <img class="pc-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Mackinac_Island_harbor.jpg/640px-Mackinac_Island_harbor.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Mackinac Island">
+      <div class="pc-ph" style="display:none">🏝</div>
+      <div class="pc-body"><div class="pc-day">Sun · Day 3</div><div class="pc-name">Mackinac Island</div><div class="pc-tag">No cars · full day</div></div>
+    </div>
+    <div class="pc">
+      <img class="pc-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sleeping_Bear_Dunes.jpg/640px-Sleeping_Bear_Dunes.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Sleeping Bear Dunes">
+      <div class="pc-ph" style="display:none">🏔</div>
+      <div class="pc-body"><div class="pc-day">Mon · Day 4</div><div class="pc-name">Sleeping Bear Dunes</div><div class="pc-tag">Arrive 8:30 AM</div></div>
+    </div>
+    <div class="pc">
+      <img class="pc-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Holland_Michigan_Big_Red_Lighthouse.jpg/640px-Holland_Michigan_Big_Red_Lighthouse.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Holland">
+      <div class="pc-ph" style="display:none">🏖</div>
+      <div class="pc-body"><div class="pc-day">Mon–Tue · Day 4–5</div><div class="pc-name">Holland</div><div class="pc-tag">Last night · fly home</div></div>
+    </div>
+  </div>
+
+  <div class="sh"><div class="sh-l">Full route</div><div class="sh-line"></div></div>
+  <div class="tl">
+    <div class="tl-s"><div class="tl-d" style="background:#3ecfcf"></div><div class="tl-date">Fri May 22 · 2:00 PM</div><div class="tl-name">GRR Airport — Pick up car & drive north</div><div class="tl-note">US-131 → I-75 · 5.5 hrs · against holiday traffic ✓</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#3ecfcf"></div><div class="tl-date">Fri May 22 · ~6:00 PM</div><div class="tl-name">Mackinac Bridge photo stop</div><div class="tl-note">Cross to UP · $4 toll</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#f0c060"></div><div class="tl-date">Fri May 22 · ~8:30 PM</div><div class="tl-name">Arrive Munising</div><div class="tl-sleep">Sleep: Terrace Motel or AmericInn</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#3ecfcf"></div><div class="tl-date">Sat May 23 · 7:30 AM</div><div class="tl-name">Pictured Rocks National Lakeshore</div><div class="tl-note">Miners Castle · Chapel Loop · Boat tour</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#3ecfcf"></div><div class="tl-date">Sat May 23 · ~11:00 AM</div><div class="tl-name">Kitch-iti-kipi — The Big Spring</div><div class="tl-note">Emerald green · self-cranked raft · 40 ft deep</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#3ecfcf"></div><div class="tl-date">Sat May 23 · ~1:30 PM</div><div class="tl-name">Tahquamenon Falls</div><div class="tl-note">2nd-largest waterfall east of Mississippi</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#f0c060"></div><div class="tl-date">Sat May 23 · ~5:00 PM</div><div class="tl-name">Arrive St. Ignace</div><div class="tl-sleep">Sleep: Quality Inn or Holiday Inn Express</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#ff6b45"></div><div class="tl-date">Sun May 24 · All day</div><div class="tl-name">Mackinac Island</div><div class="tl-note">Ferry from St. Ignace · bikes · fort · fudge · no cars</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#f0c060"></div><div class="tl-date">Sun May 24 · Evening</div><div class="tl-name">Arrive Traverse City</div><div class="tl-sleep">Sleep: Park Place Hotel or Cambria</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#3ecfcf"></div><div class="tl-date">Mon May 25 · 8:30 AM</div><div class="tl-name">Sleeping Bear Dunes</div><div class="tl-note">Pierce Stocking Drive · Dune Climb · Stop 9 overlook</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#3ecfcf"></div><div class="tl-date">Mon May 25 · 12:30 PM</div><div class="tl-name">Glen Arbor — Art's Tavern</div><div class="tl-note">Legendary burgers · Crystal River kayak option</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#3ecfcf"></div><div class="tl-date">Mon May 25 · ~4:00 PM</div><div class="tl-name">Saugatuck &amp; Holland</div><div class="tl-note">Mount Baldhead · Lake Michigan beach · dinner</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#f0c060"></div><div class="tl-date">Mon May 25 · Evening</div><div class="tl-name">Arrive Holland</div><div class="tl-sleep">Sleep: Holland or Saugatuck B&B</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#3ecfcf"></div><div class="tl-date">Tue May 26 · Morning</div><div class="tl-name">Holland — Last beach morning</div><div class="tl-note">Relax until 2:30 PM — zero pressure</div></div>
+    <div class="tl-s"><div class="tl-d" style="background:#ff6b45"></div><div class="tl-date">Tue May 26 · 5:34 PM</div><div class="tl-name">GRR Airport — Fly home</div><div class="tl-note">30-min drive · arrive by 3 PM · 2h 34m buffer ✓</div></div>
+  </div>
+</div></div>
+
+<!-- DAYS -->
+<div id="days" class="panel"><div class="content">
+
+  <div class="sh"><div class="sh-l">Friday, May 22</div><div class="sh-line"></div></div>
+  <div class="dc" id="d1">
+    <div class="dh" onclick="tog('d1')">
+      <img class="dh-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Mackinac_Bridge_2009.jpg/1280px-Mackinac_Bridge_2009.jpg" onerror="this.style.background='linear-gradient(135deg,#0e1f35,#172d47)'" alt="Mackinac Bridge">
+      <div class="dh-ov"></div><div class="d-num">1</div>
+      <div class="dh-ct"><div><div class="d-date">Fri May 22</div><div class="d-title">The Long Drive North</div></div><div class="d-chev">▼</div></div>
+    </div>
+    <div class="chips"><span class="chip ch-d">5h 30m driving</span><span class="chip ch-s">Sleep: Munising</span><span class="chip ch-d">Against holiday traffic ✓</span></div>
+    <div class="db"><div class="sw">
+      <div>
+        <div class="stop-hd"><div class="stop-ic">🌉</div><div><div class="stop-n">Mackinac Bridge</div><div class="stop-t">~6:00 PM · 20 min stop</div></div></div>
+        <img class="stop-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Mackinac_Bridge_2009.jpg/800px-Mackinac_Bridge_2009.jpg" onerror="this.style.display='none'" alt="Mackinac Bridge">
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Drive across ($4 toll). Pull into UP-side rest area for the iconic bridge photo. Keep rolling.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Stop at Mackinaw City waterfront before crossing — good dusk views and leg stretch.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Walk Headlands Dark Sky Park trail west of Mackinaw City — 20-min old-growth forest walk.</div></div>
+        </div>
+      </div>
+      <div class="sdiv"></div>
+      <div>
+        <div class="stop-hd"><div class="stop-ic">🌙</div><div><div class="stop-n">Munising Arrival</div><div class="stop-t">~8:30 PM</div></div></div>
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Takeout from West Bay Diner. Crash early — big day tomorrow.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Dinner at Dogpatch Restaurant. Walk to Munising Falls in late evening light.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Drive to Miners Beach for a Lake Superior sunset walk. Empty at 8:30 PM — completely yours.</div></div>
+        </div>
+        <div class="tip">🌡 Pack a fleece — UP evenings in May drop to 45°F fast. Sunset ~9:10 PM.</div>
+      </div>
+    </div>
+    <div class="slp"><div class="slp-ic">🌙</div><div><div class="slp-n">Munising, UP</div><div class="slp-s">Terrace Motel or AmericInn · Book today — very few rooms!</div></div></div>
+    </div>
+  </div>
+
+  <div class="sh"><div class="sh-l">Saturday, May 23</div><div class="sh-line"></div></div>
+  <div class="dc" id="d2">
+    <div class="dh" onclick="tog('d2')">
+      <img class="dh-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Pictured_Rocks_National_Lakeshore.jpg/1280px-Pictured_Rocks_National_Lakeshore.jpg" alt="Pictured Rocks">
+      <div class="dh-ov"></div><div class="d-num">2</div>
+      <div class="dh-ct"><div><div class="d-date">Sat May 23</div><div class="d-title">UP Day — Three Wonders</div></div><div class="d-chev">▼</div></div>
+    </div>
+    <div class="chips"><span class="chip ch-d">3h 30m driving</span><span class="chip ch-s">Sleep: St. Ignace</span><span class="chip ch-w">Start 7:30 AM — fills by 9 AM!</span></div>
+    <div class="db"><div class="sw">
+      <div>
+        <div class="stop-hd"><div class="stop-ic">🌊</div><div><div class="stop-n">Pictured Rocks National Lakeshore</div><div class="stop-t">7:30 AM · 2–5 hrs</div></div></div>
+        <img class="stop-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Pictured_Rocks_National_Lakeshore.jpg/800px-Pictured_Rocks_National_Lakeshore.jpg" onerror="this.style.display='none'" alt="Pictured Rocks">
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Miners Castle overlook (5-min walk) + Miners Beach. Boat tour — 2.5 hrs seated, best view of the cliffs.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Miners Castle + Miners Beach + Munising Falls (~2 hrs). Afternoon boat tour if pre-booked.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Chapel Loop — 10 miles: Chapel Falls, Chapel Rock arch, Lake Superior shoreline. Start 7 AM. Best UP hike.</div></div>
+        </div>
+      </div>
+      <div class="sdiv"></div>
+      <div>
+        <div class="stop-hd"><div class="stop-ic">💎</div><div><div class="stop-n">Kitch-iti-kipi — The Big Spring</div><div class="stop-t">~11:00 AM · 45 min–1.5 hrs</div></div></div>
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Raft ride over 40-ft emerald spring. 10,000 gal/min bubbling through limestone. The "Mirror of Heaven."</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Raft ride + 0.3-mi boardwalk loop + Indian Lake State Park beach (5 min away).</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Raft ride + Indian Lake kayak rental (100 yards away). Paddle the south bay — 1.5–2 hrs on the water.</div></div>
+        </div>
+        <div class="tip">⏰ Arrive before 9 AM or after 5 PM — midday waits run 1–2 hrs on holidays. M-149, 12 mi west of Manistique.</div>
+      </div>
+      <div class="sdiv"></div>
+      <div>
+        <div class="stop-hd"><div class="stop-ic">💦</div><div><div class="stop-n">Tahquamenon Falls State Park</div><div class="stop-t">~1:30 PM · 1.5–4 hrs</div></div></div>
+        <img class="stop-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Tahquamenon_Falls_MI.jpg/800px-Tahquamenon_Falls_MI.jpg" onerror="this.style.display='none'" alt="Tahquamenon Falls">
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Upper Falls platform — 5-min walk, 200-ft wide amber waterfall. 2nd-largest east of Mississippi.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Upper Falls + rowboat at Lower Falls — eye-level with the cascade from the water. ~2 hrs total.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Full 9-mile North Country Trail loop, Upper + Lower Falls via the ridge. Trekking poles recommended.</div></div>
+        </div>
+      </div>
+      <div class="sdiv"></div>
+      <div>
+        <div class="stop-hd"><div class="stop-ic">🌉</div><div><div class="stop-n">St. Ignace Evening</div><div class="stop-t">~5:00 PM</div></div></div>
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Dinner at Bentley's Tavern with Straits views. Watch bridge lights come on from the waterfront park.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Castle Rock overlook (100 steps, panoramic bridge + island view) before dinner.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Evening trail run on North Country Trail west of town — pine ridgeline, almost always deserted at dusk.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="slp"><div class="slp-ic">🌙</div><div><div class="slp-n">St. Ignace, UP</div><div class="slp-s">Quality Inn or Holiday Inn Express · Book today — UP side for easy Sunday ferry</div></div></div>
+    </div>
+  </div>
+
+  <div class="sh"><div class="sh-l">Sunday, May 24</div><div class="sh-line"></div></div>
+  <div class="dc" id="d3">
+    <div class="dh" onclick="tog('d3')">
+      <img class="dh-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Mackinac_Island_harbor.jpg/1280px-Mackinac_Island_harbor.jpg" onerror="this.style.background='linear-gradient(135deg,#0e1f35,#172d47)'" alt="Mackinac Island">
+      <div class="dh-ov"></div><div class="d-num">3</div>
+      <div class="dh-ct"><div><div class="d-date">Sun May 24</div><div class="d-title">Mackinac Island + Bridge South</div></div><div class="d-chev">▼</div></div>
+    </div>
+    <div class="chips"><span class="chip ch-d">2h 30m driving</span><span class="chip ch-s">Sleep: Traverse City</span><span class="chip ch-d">Bridge south evening — clear ✓</span></div>
+    <div class="db"><div class="sw">
+      <div>
+        <div class="stop-hd"><div class="stop-ic">🏝</div><div><div class="stop-n">Mackinac Island</div><div class="stop-t">All day · 5–8 hrs</div></div></div>
+        <img class="stop-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Mackinac_Island_harbor.jpg/800px-Mackinac_Island_harbor.jpg" onerror="this.style.display='none'" alt="Mackinac Island">
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Ferry from St. Ignace, horse carriage tour ($35/pp), Grand Hotel porch lunch, fudge on Main Street. No cars anywhere.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Rent bikes, flat 8-mile perimeter road with Lake Huron views, hike Fort Mackinac, lunch at the Carriage House.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Perimeter + interior trails (Tranquil Bluff, Crack-in-the-Island, Soldier's Garden) — 18–22 mi total.</div></div>
+        </div>
+        <div class="tip">⛴ Book ferry at sheplersferry.com. Take evening ferry back (~6–8 PM) then cross bridge south.</div>
+      </div>
+      <div class="sdiv"></div>
+      <div>
+        <div class="stop-hd"><div class="stop-ic">💎</div><div><div class="stop-n">Petoskey — En-route stop</div><div class="stop-t">Optional · 30–45 min</div></div></div>
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Skip — drive straight to Traverse City for a relaxed dinner and early night before the Dunes.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Gaslight District walk + beach (hunt for Petoskey stones — fossilized coral, unique to this area).</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Sunset jog on Little Traverse Wheelway through Bay Harbor — paved, lake views, 4 mi out/back.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="slp"><div class="slp-ic">🌙</div><div><div class="slp-n">Traverse City</div><div class="slp-s">Park Place Hotel (waterfront) or Cambria · Book this week</div></div></div>
+    </div>
+  </div>
+
+  <div class="sh"><div class="sh-l">Monday, May 25</div><div class="sh-line"></div></div>
+  <div class="dc" id="d4">
+    <div class="dh" onclick="tog('d4')">
+      <img class="dh-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sleeping_Bear_Dunes.jpg/1280px-Sleeping_Bear_Dunes.jpg" onerror="this.style.background='linear-gradient(135deg,#0e1f35,#172d47)'" alt="Sleeping Bear Dunes">
+      <div class="dh-ov"></div><div class="d-num">4</div>
+      <div class="dh-ct"><div><div class="d-date">Mon May 25</div><div class="d-title">Sleeping Bear Dunes → Holland</div></div><div class="d-chev">▼</div></div>
+    </div>
+    <div class="chips"><span class="chip ch-d">2h 45m driving</span><span class="chip ch-s">Sleep: Holland/Saugatuck</span><span class="chip ch-w">Dunes by 8:30 AM — fills by 10!</span></div>
+    <div class="db"><div class="sw">
+      <div>
+        <div class="stop-hd"><div class="stop-ic">🏔</div><div><div class="stop-n">Pierce Stocking Scenic Drive</div><div class="stop-t">8:30 AM · 1–1.5 hrs</div></div></div>
+        <img class="stop-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Sleeping_Bear_Dunes.jpg/800px-Sleeping_Bear_Dunes.jpg" onerror="this.style.display='none'" alt="Sleeping Bear Dunes">
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Drive the 7.4-mi loop. Stop 9 (Lake Michigan Overlook) is the best view in Michigan — 5 min on foot.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Walk the ridge trail at Stop 9 (30 min) + Stop 4 (Glen Lakes overlook). Both stunning.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Park at Stop 9, descend dune to Lake Michigan and climb back — 650 ft of sand. Budget 1.5 hrs.</div></div>
+        </div>
+      </div>
+      <div class="sdiv"></div>
+      <div>
+        <div class="stop-hd"><div class="stop-ic">🏜</div><div><div class="stop-n">Sleeping Bear Dune Climb</div><div class="stop-t">45 min–2.5 hrs</div></div></div>
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Walk to the base. The scale in person stops everyone cold — nothing prepares you for it.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Climb to first ridge (~130 ft). Glen Lakes panorama behind you. Worth every step. 45 min.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Run to Lake Michigan and back — 4-mile, 450+ ft of sand. Hardest easy hike in Michigan. Bring 2L water.</div></div>
+        </div>
+      </div>
+      <div class="sdiv"></div>
+      <div>
+        <div class="stop-hd"><div class="stop-ic">🍔</div><div><div class="stop-n">Glen Arbor — Art's Tavern</div><div class="stop-t">~12:30 PM · 1–3 hrs</div></div></div>
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Legendary burgers since 1934. Drive around Little Glen Lake for the postcard view. Cash only!</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Kayak Crystal River (2 mi, very gentle, ends at Lake Michigan). Rentals at Crystal River Outfitters.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Kayak Crystal River to the lake, then bike Sleeping Bear Heritage Trail back (~15-mi loop).</div></div>
+        </div>
+      </div>
+      <div class="sdiv"></div>
+      <div>
+        <div class="stop-hd"><div class="stop-ic">🌅</div><div><div class="stop-n">Saugatuck &amp; Holland</div><div class="stop-t">~4:00 PM · 2–3 hrs</div></div></div>
+        <img class="stop-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Holland_Michigan_Big_Red_Lighthouse.jpg/800px-Holland_Michigan_Big_Red_Lighthouse.jpg" onerror="this.style.display='none'" alt="Holland Michigan">
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">$1 ferry across Kalamazoo River, wine at Singapore Bank Winery, sunset dinner at Coral Gables.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Climb Mount Baldhead (300 steps, golden-hour Lake Michigan views), then Tunnel Park beach at dusk.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Rent bikes in Holland, ride Laketown Trail to the lakeshore and back (~14 mi), late dinner in Douglas.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="slp"><div class="slp-ic">🌙</div><div><div class="slp-n">Holland or Saugatuck</div><div class="slp-s">Wickwood Inn or Blue Star B&Bs · Book this week</div></div></div>
+    </div>
+  </div>
+
+  <div class="sh"><div class="sh-l">Tuesday, May 26</div><div class="sh-line"></div></div>
+  <div class="dc" id="d5">
+    <div class="dh" onclick="tog('d5')">
+      <img class="dh-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Holland_Michigan_Big_Red_Lighthouse.jpg/1280px-Holland_Michigan_Big_Red_Lighthouse.jpg" onerror="this.style.background='linear-gradient(135deg,#0e1f35,#172d47)'" alt="Holland Beach">
+      <div class="dh-ov"></div><div class="d-num">5</div>
+      <div class="dh-ct"><div><div class="d-date">Tue May 26</div><div class="d-title">Easy Morning → Fly Home</div></div><div class="d-chev">▼</div></div>
+    </div>
+    <div class="chips"><span class="chip ch-d">30 min to GRR</span><span class="chip ch-s">Leave Holland 2:30 PM</span><span class="chip ch-d">2h 34m flight buffer ✓</span></div>
+    <div class="db"><div class="sw">
+      <div>
+        <div class="stop-hd"><div class="stop-ic">🏖</div><div><div class="stop-n">Holland — Last Lake Michigan morning</div><div class="stop-t">Morning · leave by 2:30 PM</div></div></div>
+        <div class="spec">
+          <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Sleep in, coffee on the deck, one last walk on Holland State Park Beach. No pressure until 2:30 PM.</div></div>
+          <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Windmill Island Gardens (opens 9 AM), browse 8th Street for gifts, lunch at New Holland Brewing.</div></div>
+          <div class="opt high"><div class="opt-l">HIGH</div><div class="opt-t">Morning run on Laketown Trail, shower, brunch — easiest airport drive of any Michigan trip.</div></div>
+        </div>
+        <div class="tip">✈ Flight 5:34 PM · Leave Holland 2:30 PM → GRR 3:00 PM → security 3:45 PM → 1h 49m at the gate. GRR is tiny — 45 min is plenty.</div>
+      </div>
+    </div>
+    <div class="slp"><div class="slp-ic">✈</div><div><div class="slp-n">Fly home from GRR</div><div class="slp-s">5:34 PM departure · Rental car return curbside at terminal</div></div></div>
+    </div>
+  </div>
+
+</div></div>
+
+<!-- BOOKINGS -->
+<div id="book" class="panel"><div class="content">
+  <div class="alert a-w"><div class="at">⚠ Book these NOW — seriously</div><div class="ab">Munising hotels and Pictured Rocks boat tours sell out 4–6 weeks before Memorial Day. The ferry and St. Ignace hotel go fast too. Don't wait.</div></div>
+
+  <div class="sh"><div class="sh-l">Book today</div><div class="sh-line"></div></div>
+  <div class="bi urg"><div><div class="bn">Pictured Rocks Boat Tour</div><div class="bs">Sat May 23 · 2.5 hr narrated cruise past the cliffs. Irreplaceable from-the-water view.<br><a class="bl" href="https://www.explorethenorth.com" target="_blank">explorethenorth.com ↗</a></div></div><div class="pri pri-now">NOW</div></div>
+  <div class="bi urg"><div><div class="bn">Mackinac Island Ferry</div><div class="bs">Sun May 24 · Shepler's from St. Ignace dock. Round-trip ~$30/pp.<br><a class="bl" href="https://www.sheplersferry.com" target="_blank">sheplersferry.com ↗</a></div></div><div class="pri pri-now">NOW</div></div>
+  <div class="bi urg"><div><div class="bn">Hotel: Munising, UP</div><div class="bs">Fri May 22 night · Terrace Motel or AmericInn. Very few rooms — fills weeks ahead of Memorial Day.</div></div><div class="pri pri-now">NOW</div></div>
+  <div class="bi urg"><div><div class="bn">Hotel: St. Ignace, UP</div><div class="bs">Sat May 23 night · Quality Inn or Holiday Inn Express. UP side for easy Sunday ferry.</div></div><div class="pri pri-now">NOW</div></div>
+
+  <div class="sh"><div class="sh-l">Book this week</div><div class="sh-line"></div></div>
+  <div class="bi sn"><div><div class="bn">Hotel: Traverse City</div><div class="bs">Sun May 24 night · Park Place Hotel (downtown waterfront) or Cambria.</div></div><div class="pri pri-soon">SOON</div></div>
+  <div class="bi sn"><div><div class="bn">Hotel: Holland or Saugatuck</div><div class="bs">Mon May 25 night · Wickwood Inn or Blue Star B&Bs. Holland has more inventory.</div></div><div class="pri pri-soon">SOON</div></div>
+  <div class="bi sn"><div><div class="bn">Mackinac Island Bike Rentals</div><div class="bs">Sun May 24 · Ryba's or Island Bike & Carriage. Waits run 45+ min on holiday Sundays.<br><span style="color:var(--water);font-weight:500">Call: (906) 847-3208</span></div></div><div class="pri pri-soon">SOON</div></div>
+  <div class="bi sn"><div><div class="bn">Crystal River Kayak Rental</div><div class="bs">Mon May 25 · Crystal River Outfitters. Walk-up is risky on Memorial Day.<br><a class="bl" href="https://www.crystalriveroutfitters.com" target="_blank">crystalriveroutfitters.com ↗</a></div></div><div class="pri pri-soon">SOON</div></div>
+
+  <div class="sh"><div class="sh-l">Pay on arrival</div><div class="sh-line"></div></div>
+  <div class="bi"><div><div class="bn">Michigan Recreation Passport</div><div class="bs">Required for Palms Book (Kitch-iti-kipi), Sleeping Bear, Tahquamenon. $17 out-of-state. Pay at first park entrance.</div></div><div class="pri pri-arr">ARRIVE</div></div>
+  <div class="bi"><div><div class="bn">Tahquamenon Rowboat</div><div class="bs">Sat May 23 · Lower Falls boats — first come, first served. Arrive before 11 AM.</div></div><div class="pri pri-arr">ARRIVE</div></div>
+</div></div>
+
+<!-- TRAFFIC -->
+<div id="traffic" class="panel"><div class="content">
+  <div class="alert a-ok"><div class="at">Every traffic pattern works in your favor</div><div class="ab">The farthest-first routing turns all Memorial Day congestion into advantages. Here's the breakdown day by day.</div></div>
+
+  <div class="tc">
+    <div class="th"><div class="tic">🚗</div><div><div class="tt">Friday northbound · 2–8 PM</div><div class="tsub">Your biggest single advantage of the trip</div></div></div>
+    <div class="tb2">Heading north on a holiday Friday afternoon is counterintuitive — and that's why it works. All outbound traffic flows south toward Detroit, Chicago, and the beaches. US-131 and I-75 northbound will be light. You arrive at Pictured Rocks hours before Saturday's crowd.</div>
+    <div class="tbar"><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#f0c060;opacity:.75"></div><div class="ts" style="background:#f0c060;opacity:.75"></div><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#3ecfcf"></div></div>
+    <div class="tlbls"><div class="tlbl">12P</div><div class="tlbl">2P</div><div class="tlbl">4P</div><div class="tlbl">6P</div><div class="tlbl">8P</div><div class="tlbl">10P</div><div class="tlbl">12A</div><div class="tlbl">2A</div></div>
+    <div class="leg"><div class="li"><div class="ld" style="background:#3ecfcf"></div>Clear</div><div class="li"><div class="ld" style="background:#f0c060"></div>Moderate</div><div class="li"><div class="ld" style="background:#ff6b45"></div>Heavy</div></div>
+  </div>
+
+  <div class="tc">
+    <div class="th"><div class="tic">🌉</div><div><div class="tt">Mackinac Bridge southbound</div><div class="tsub">Sunday evening crossing window</div></div></div>
+    <div class="tb2">The worst window is Sunday 11 AM – 7 PM and all of Memorial Day Monday. Take the last island ferry back (~6–8 PM Sunday) and cross then. <strong>Never cross southbound Monday</strong> — worst window of the entire holiday weekend.</div>
+    <div class="tbar"><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#f0c060;opacity:.75"></div><div class="ts" style="background:#ff6b45;opacity:.9"></div><div class="ts" style="background:#ff6b45;opacity:.9"></div><div class="ts" style="background:#ff6b45;opacity:.9"></div><div class="ts" style="background:#f0c060;opacity:.75"></div><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#3ecfcf"></div></div>
+    <div class="tlbls"><div class="tlbl">6A</div><div class="tlbl">8A</div><div class="tlbl">10A</div><div class="tlbl">12P</div><div class="tlbl">2P</div><div class="tlbl">5P</div><div class="tlbl">8P</div><div class="tlbl">11P</div></div>
+  </div>
+
+  <div class="tc">
+    <div class="th"><div class="tic">✈</div><div><div class="tt">Tuesday return to GRR</div><div class="tsub">Easiest drive of the entire trip</div></div></div>
+    <div class="tb2">Holland to GRR is 30 minutes. All holiday traffic is now reversed toward Detroit and Chicago — away from you. Leave Holland 2:30 PM → GRR 3:00 PM → security 3:45 PM → 1h 49m at the gate before your 5:34 PM flight.</div>
+    <div class="tbar"><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#3ecfcf"></div><div class="ts" style="background:#f0c060;opacity:.75"></div><div class="ts" style="background:#f0c060;opacity:.75"></div></div>
+    <div class="tlbls"><div class="tlbl">6A</div><div class="tlbl">8A</div><div class="tlbl">10A</div><div class="tlbl">12P</div><div class="tlbl">2P</div><div class="tlbl">4P</div><div class="tlbl">6P</div><div class="tlbl">8P</div></div>
+  </div>
+
+  <div class="sh"><div class="sh-l">Daily summary</div><div class="sh-line"></div></div>
+  <div class="bi"><div class="pri pri-arr" style="margin-top:0">Fri</div><div><div class="bn">Drive north against holiday outbound traffic</div><div class="bs">US-131 → I-75 northbound is clear while everyone heads south and east</div></div></div>
+  <div class="bi"><div class="pri pri-arr" style="margin-top:0">Sat</div><div><div class="bn">UP crowds peak at noon — you start at 7:30 AM</div><div class="bs">Early arrival at Pictured Rocks beats the entire Saturday holiday wave</div></div></div>
+  <div class="bi"><div class="pri pri-arr" style="margin-top:0">Sun</div><div><div class="bn">Bridge south evening — moderate, not gridlock</div><div class="bs">Avoid bridge Monday at all costs; Sunday evening is clear by comparison</div></div></div>
+  <div class="bi"><div class="pri pri-arr" style="margin-top:0">Mon</div><div><div class="bn">Dunes: arrive 8:30 AM before parking fills</div><div class="bs">Memorial Day Monday is Sleeping Bear's busiest day — early is essential</div></div></div>
+  <div class="bi"><div class="pri pri-arr" style="margin-top:0">Tue</div><div><div class="bn">Holland → GRR: 30 min, zero traffic stress</div><div class="bs">Holiday traffic now flowing away from you toward the cities</div></div></div>
+</div></div>
+
+<!-- BOTTOM BAR -->
+<div class="btm">
+  <button class="btm-t on" id="b-home" onclick="sw('home',this,'b-home')"><div class="bic">🗺</div>Overview</button>
+  <button class="btm-t" id="b-days" onclick="sw('days',this,'b-days')"><div class="bic">📅</div>Days</button>
+  <button class="btm-t" id="b-book" onclick="sw('book',this,'b-book')"><div class="bic">✅</div>Bookings</button>
+  <button class="btm-t" id="b-traf" onclick="sw('traffic',this,'b-traf')"><div class="bic">🚦</div>Traffic</button>
+</div>
+
+<script>
+const PM={'home':'b-home','days':'b-days','book':'b-book','traffic':'b-traf'};
+const PA=['home','days','book','traffic'];
+const NT=document.querySelectorAll('.nav-tab');
+
+function sw(id,el,bid){
+  PA.forEach(p=>document.getElementById(p).classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.btm-t').forEach(t=>t.classList.remove('on'));
+  document.getElementById(PM[id]).classList.add('on');
+  NT.forEach((t,i)=>t.classList.toggle('on',PA[i]===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function tog(id){
+  document.getElementById(id).classList.toggle('open');
+}
+
+document.getElementById('d1').classList.add('open');
+</script>
+</body>
+</html>
