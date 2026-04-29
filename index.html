@@ -18,15 +18,15 @@
   --ember: #e8602a;
   --snow: #ffffff;
   --snow2: rgba(255,255,255,0.92);
-  --fog: rgba(255,255,255,0.82);
-  --fog2: rgba(255,255,255,0.62);
+  --fog: rgba(255,255,255,0.92);
+  --fog2: rgba(255,255,255,0.72);
   --glass: rgba(255,255,255,0.12);
   --glass2: rgba(255,255,255,0.18);
   --glass3: rgba(255,255,255,0.24);
   --rim: rgba(255,255,255,0.22);
   --rim2: rgba(255,255,255,0.32);
-  --dark-glass: rgba(8,20,38,0.52);
-  --dark-glass2: rgba(8,20,38,0.42);
+  --dark-glass: rgba(8,20,38,0.68);
+  --dark-glass2: rgba(8,20,38,0.58);
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -74,7 +74,7 @@ body {
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rim);border-bottom:1px solid var(--rim)}
 .stat{background:rgba(8,20,40,0.52);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:.95rem .4rem;text-align:center}
 .stat-n{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--water);line-height:1;text-shadow:0 0 20px rgba(77,217,217,.4)}
-.stat-l{font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--fog2);margin-top:3px}
+.stat-l{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--fog2);margin-top:3px}
 
 /* NAV */
 .nav-wrap{position:sticky;top:0;z-index:50;background:rgba(6,18,36,0.72);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:.5px solid var(--rim)}
@@ -93,18 +93,18 @@ body {
 .pc-img{width:100%;height:105px;object-fit:cover;display:block}
 .pc-ph{width:100%;height:105px;display:flex;align-items:center;justify-content:center;font-size:2rem;background:rgba(255,255,255,.06)}
 .pc-body{padding:8px 10px 10px}
-.pc-day{font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--water);margin-bottom:3px}
-.pc-name{font-size:12px;font-weight:600;color:var(--snow);line-height:1.3}
-.pc-tag{font-size:10px;color:var(--fog);margin-top:2px}
+.pc-day{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--water);margin-bottom:3px}
+.pc-name{font-size:13px;font-weight:600;color:var(--snow);line-height:1.3}
+.pc-tag{font-size:11px;color:var(--fog);margin-top:2px}
 
 /* TIMELINE */
 .tl{position:relative;padding-left:1.5rem;margin-top:.5rem}
 .tl::before{content:'';position:absolute;left:6px;top:10px;bottom:10px;width:1px;background:linear-gradient(to bottom,var(--water),var(--gold) 50%,var(--ember))}
 .tl-s{position:relative;padding:.6rem 0 .6rem 1rem}
 .tl-d{position:absolute;left:-1.5rem;top:50%;transform:translateY(-50%);width:13px;height:13px;border-radius:50%;border:2px solid rgba(0,0,0,.4);flex-shrink:0}
-.tl-date{font-size:10px;color:var(--fog2);margin-bottom:1px}
-.tl-name{font-size:13px;font-weight:600;color:var(--snow);text-shadow:0 1px 6px rgba(0,0,0,.4)}
-.tl-note{font-size:11px;color:var(--fog);margin-top:1px}
+.tl-date{font-size:11px;color:var(--fog2);margin-bottom:1px}
+.tl-name{font-size:14px;font-weight:600;color:var(--snow);text-shadow:0 1px 6px rgba(0,0,0,.4)}
+.tl-note{font-size:12px;color:var(--fog);margin-top:1px}
 .tl-sleep{font-size:11px;color:var(--gold);margin-top:1px;font-weight:500}
 
 /* SECTION HEADER */
@@ -125,7 +125,7 @@ body {
 .d-chev{font-size:12px;color:rgba(255,255,255,.6);transition:transform .3s;flex-shrink:0;margin-bottom:4px}
 .dc.open .d-chev{transform:rotate(180deg)}
 .chips{display:flex;flex-wrap:wrap;gap:5px;padding:.65rem .9rem;border-bottom:.5px solid var(--rim);background:rgba(0,0,0,.10)}
-.chip{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:500;border:.5px solid}
+.chip{font-size:11px;padding:4px 10px;border-radius:20px;font-weight:500;border:.5px solid}
 .ch-d{background:rgba(77,217,217,.14);color:var(--water);border-color:rgba(77,217,217,.3)}
 .ch-s{background:rgba(245,200,66,.14);color:var(--gold);border-color:rgba(245,200,66,.3)}
 .ch-w{background:rgba(255,112,85,.14);color:var(--ember);border-color:rgba(255,112,85,.3)}
@@ -134,25 +134,25 @@ body {
 .sw{padding:.75rem .9rem;display:flex;flex-direction:column;gap:1.1rem}
 .stop-hd{display:flex;align-items:center;gap:8px;margin-bottom:7px}
 .stop-ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;background:var(--glass2)}
-.stop-n{font-size:13px;font-weight:600;color:var(--snow);text-shadow:0 1px 4px rgba(0,0,0,.3)}
-.stop-t{font-size:10px;color:var(--fog2)}
+.stop-n{font-size:14px;font-weight:600;color:var(--snow);text-shadow:0 1px 4px rgba(0,0,0,.3)}
+.stop-t{font-size:11px;color:var(--fog2)}
 .stop-img{width:100%;height:115px;object-fit:cover;border-radius:10px;display:block;margin-bottom:8px}
 .spec{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}
-.opt{border-radius:8px;padding:7px 8px;border:.5px solid;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-.opt-l{font-size:9px;font-weight:700;letter-spacing:.06em;margin-bottom:4px}
-.opt-t{font-size:10px;line-height:1.45;color:var(--fog)}
-.mild{border-color:rgba(46,206,206,.45);background:rgba(46,206,206,.14)}
+.opt{border-radius:8px;padding:9px 10px;border:.5px solid;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.opt-l{font-size:10px;font-weight:700;letter-spacing:.06em;margin-bottom:4px}
+.opt-t{font-size:11.5px;line-height:1.55;color:var(--snow2)}
+.mild{border-color:rgba(46,206,206,.45);background:rgba(46,206,206,.20)}
 .mild .opt-l{color:var(--water)}
-.mod{border-color:rgba(240,180,41,.45);background:rgba(240,180,41,.14)}
+.mod{border-color:rgba(240,180,41,.45);background:rgba(240,180,41,.20)}
 .mod .opt-l{color:var(--gold)}
-.high{border-color:rgba(232,96,42,.45);background:rgba(232,96,42,.14)}
+.high{border-color:rgba(232,96,42,.45);background:rgba(232,96,42,.20)}
 .high .opt-l{color:var(--ember)}
-.tip{font-size:10px;font-style:italic;color:var(--fog);margin-top:6px;line-height:1.5}
+.tip{font-size:11.5px;font-style:italic;color:var(--fog);margin-top:6px;line-height:1.5}
 .sdiv{height:.5px;background:var(--rim)}
 .slp{display:flex;align-items:center;gap:10px;padding:.75rem .9rem;border-top:.5px solid var(--rim);background:rgba(245,200,66,.10)}
 .slp-ic{width:32px;height:32px;border-radius:9px;background:rgba(245,200,66,.15);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
-.slp-n{font-size:13px;font-weight:600;color:var(--gold)}
-.slp-s{font-size:10px;color:var(--fog2);margin-top:1px}
+.slp-n{font-size:14px;font-weight:600;color:var(--gold)}
+.slp-s{font-size:11px;color:var(--fog2);margin-top:1px}
 
 /* MAP BUTTON */
 .map-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:.95rem;border-radius:14px;background:var(--water);color:#06201f;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:all .15s;letter-spacing:.02em;box-shadow:0 4px 24px rgba(77,217,217,.35)}
@@ -166,26 +166,26 @@ body {
 .pri-now{background:rgba(255,112,85,.2);color:var(--ember)}
 .pri-soon{background:rgba(245,200,66,.2);color:var(--gold)}
 .pri-arr{background:rgba(77,217,217,.2);color:var(--water)}
-.bn{font-size:13px;font-weight:600;color:var(--snow);margin-bottom:3px;text-shadow:0 1px 4px rgba(0,0,0,.3)}
-.bs{font-size:11px;color:var(--fog);line-height:1.5}
+.bn{font-size:14px;font-weight:600;color:var(--snow);margin-bottom:3px;text-shadow:0 1px 4px rgba(0,0,0,.3)}
+.bs{font-size:12px;color:var(--fog);line-height:1.5}
 .bl{color:var(--water);text-decoration:none;font-weight:600}
 
 /* ALERTS */
 .alert{border-radius:12px;padding:1rem 1.1rem;margin-bottom:1.1rem;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .a-ok{background:rgba(77,217,217,.1);border:.5px solid rgba(77,217,217,.3)}
 .a-w{background:rgba(255,112,85,.1);border:.5px solid rgba(255,112,85,.3)}
-.at{font-size:13px;font-weight:600;margin-bottom:5px}
+.at{font-size:14px;font-weight:600;margin-bottom:5px}
 .a-ok .at{color:var(--water)}
 .a-w .at{color:var(--ember)}
-.ab{font-size:12px;color:var(--fog);line-height:1.65}
+.ab{font-size:13px;color:var(--fog);line-height:1.65}
 
 /* TRAFFIC */
 .tc{background:var(--dark-glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:.5px solid var(--rim);border-radius:14px;padding:1rem;margin-bottom:.9rem}
 .th{display:flex;align-items:center;gap:10px;margin-bottom:.75rem}
 .tic{width:38px;height:38px;border-radius:10px;background:var(--glass2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.tt{font-size:13px;font-weight:600;color:var(--snow)}
-.tsub{font-size:11px;color:var(--fog2);margin-top:1px}
-.tb2{font-size:12px;color:var(--fog);line-height:1.65;margin-bottom:.8rem}
+.tt{font-size:14px;font-weight:600;color:var(--snow)}
+.tsub{font-size:12px;color:var(--fog2);margin-top:1px}
+.tb2{font-size:13px;color:var(--fog);line-height:1.65;margin-bottom:.8rem}
 .tb2 strong{color:var(--ember);font-weight:600}
 .tbar{display:flex;gap:2px;height:8px;border-radius:4px;overflow:hidden;margin-bottom:4px}
 .ts{flex:1}
@@ -217,7 +217,7 @@ body {
 </div>
 
 <div class="hero" style="position:relative">
-  <img class="hero-img" src="https://images.unsplash.com/photo-1504198322253-cfa87a0ff60f?auto=format&w=1200&q=80&fit=crop" referrerpolicy="no-referrer" onerror="this.style.background='linear-gradient(135deg,#071520,#0d2a40)';this.style.display='block'" alt="Pictured Rocks">
+  <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Pictured_rocks_michigan.jpg/1280px-Pictured_rocks_michigan.jpg" onerror="this.style.background='linear-gradient(135deg,#071520,#0d2a40)';this.style.display='block'" alt="Pictured Rocks">
   <div class="hero-ov"></div>
   <div class="hero-ct">
     <div class="hero-ey">Memorial Day Weekend · 2026</div>
@@ -266,7 +266,7 @@ body {
 
     <!-- DAY 2 — SATURDAY -->
     <div class="pc">
-      <img class="pc-img" src="https://images.unsplash.com/photo-1504198322253-cfa87a0ff60f?auto=format&w=640&q=80&fit=crop" referrerpolicy="no-referrer" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Pictured Rocks">
+      <img class="pc-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Pictured_rocks_michigan.jpg/640px-Pictured_rocks_michigan.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Pictured Rocks">
       <div class="pc-ph" style="display:none">🌊</div>
       <div class="pc-body">
         <div class="pc-day">Sat May 23 · Day 2</div>
@@ -369,7 +369,7 @@ body {
   <div class="sh"><div class="sh-l">Saturday, May 23</div><div class="sh-line"></div></div>
   <div class="dc" id="d2">
     <div class="dh" onclick="tog('d2')">
-      <img class="dh-img" src="https://images.unsplash.com/photo-1504198322253-cfa87a0ff60f?auto=format&w=1200&q=80&fit=crop" referrerpolicy="no-referrer" alt="Pictured Rocks">
+      <img class="dh-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Pictured_rocks_michigan.jpg/1280px-Pictured_rocks_michigan.jpg" alt="Pictured Rocks">
       <div class="dh-ov"></div><div class="d-num">2</div>
       <div class="dh-ct"><div><div class="d-date">Sat May 23</div><div class="d-title">UP Day — Three Wonders</div></div><div class="d-chev">▼</div></div>
     </div>
@@ -377,7 +377,7 @@ body {
     <div class="db"><div class="sw">
       <div>
         <div class="stop-hd"><div class="stop-ic">🌊</div><div><div class="stop-n">Pictured Rocks National Lakeshore</div><div class="stop-t">7:30 AM · 2–5 hrs</div></div></div>
-        <img class="stop-img" src="https://images.unsplash.com/photo-1504198322253-cfa87a0ff60f?auto=format&w=800&q=80&fit=crop" referrerpolicy="no-referrer" onerror="this.style.display='none'" alt="Pictured Rocks">
+        <img class="stop-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Pictured_rocks_michigan.jpg/960px-Pictured_rocks_michigan.jpg" onerror="this.style.display='none'" alt="Pictured Rocks">
         <div class="spec">
           <div class="opt mild"><div class="opt-l">MILD</div><div class="opt-t">Miners Castle overlook (5-min walk) + Miners Beach. Boat tour — 2.5 hrs seated, best view of the cliffs.</div></div>
           <div class="opt mod"><div class="opt-l">MODERATE</div><div class="opt-t">Miners Castle + Miners Beach + Munising Falls (~2 hrs). Afternoon boat tour if pre-booked.</div></div>
